@@ -1,7 +1,7 @@
 wpf-master-child
 ================
 
-The purpose of this project is just to demonstrate how you can use WPF to create a mster child view.
+The purpose of this project is just to demonstrate how you can use WPF to create a master child view.
 
 It demonstrates
 
