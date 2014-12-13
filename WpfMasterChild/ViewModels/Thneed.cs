@@ -8,9 +8,12 @@ using Color = System.Windows.Media.Color;
 
 namespace WpfMasterChild.ViewModels
 {
+    //
+    // A Thneed is an example of a simple data item
+    // It contains two properties: Name and ThneedColor
+    //
     public class Thneed : INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string _name;
@@ -55,7 +58,5 @@ namespace WpfMasterChild.ViewModels
                 }
             }
         }
-
-
     }
 

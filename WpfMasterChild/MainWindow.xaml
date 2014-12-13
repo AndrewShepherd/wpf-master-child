@@ -5,11 +5,13 @@
         xmlns:local="clr-namespace:WpfMasterChild"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
+        <!-- The only view model that gets created by the framework. All other view models
+        get created by this one -->
         <viewModels:ThneedCollection x:Key="ThneedCollection" />
-
-
-
-    <!-- Another Data Datemplate. This has a key set, so it will not be the default. The list view uses this template-->
+        
+    <!-- A DataTemplate for displaying Thneeds. 
+         This has a key set, so it will not be the default. You must explicitly tell a control to use this template
+        The list view uses this template-->
         <DataTemplate x:Key="ThneedListItem" DataType="{x:Type viewModels:Thneed}">
             <Border Width="120" Height="100" Margin="10, 10, 10, 10" Padding="6">
                 <Border.Background>
@@ -20,17 +22,17 @@
                 </Viewbox>
             </Border>
         </DataTemplate>
-        
-
     </Window.Resources>
     <Grid DataContext="{StaticResource ThneedCollection}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <!-- The list view. I explicitly ask to use the ThneedListItem data template -->
-        <ListView Name="_thneedListView" Grid.Row="0" ItemsSource="{Binding AllThneeds}" ItemTemplate="{StaticResource ThneedListItem}">
+        <TextBlock Margin="3">Select a Thneed to start editing</TextBlock>
+        <!-- The list view. I explicitly ask to use the 'ThneedListItem' data template -->
+        <ListView Name="_thneedListView" Grid.Row="1" ItemsSource="{Binding AllThneeds}" ItemTemplate="{StaticResource ThneedListItem}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -40,11 +42,9 @@
         
         <!-- Content presenter, displaying the current thneed. I don't tell it which template to use
              so it uses the default template.
-        
-        
              See 'App.xaml', that's where we wire up the default template for Thneeds
         -->
-        <ContentPresenter Grid.Row="1">
+        <ContentPresenter Grid.Row="2">
             <ContentPresenter.Content>
                 <Binding ElementName="_thneedListView" Path="SelectedItem" />
             </ContentPresenter.Content>
