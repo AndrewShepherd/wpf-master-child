@@ -1,0 +1,16 @@
+﻿<Application x:Class="WpfMasterChild.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             
+                     xmlns:viewModels="clr-namespace:WpfMasterChild.ViewModels"
+                     xmlns:local="clr-namespace:WpfMasterChild"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- A DataTemplate. This has no key, so whenever the WPF framework needs
+             to display a Thneed, it will default to this data template
+        -->
+        <DataTemplate DataType="{x:Type viewModels:Thneed}">
+            <local:ThneedEditControl />
+        </DataTemplate>
+    </Application.Resources>
+</Application>

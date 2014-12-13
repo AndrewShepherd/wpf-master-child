@@ -1,0 +1,53 @@
+﻿<Window x:Class="WpfMasterChild.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:WpfMasterChild.ViewModels"
+        xmlns:local="clr-namespace:WpfMasterChild"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <viewModels:ThneedCollection x:Key="ThneedCollection" />
+
+
+
+    <!-- Another Data Datemplate. This has a key set, so it will not be the default. The list view uses this template-->
+        <DataTemplate x:Key="ThneedListItem" DataType="{x:Type viewModels:Thneed}">
+            <Border Width="120" Height="100" Margin="10, 10, 10, 10" Padding="6">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding ThneedColor}" />
+                </Border.Background>
+                <Viewbox>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="White" Text="{Binding Name}" />
+                </Viewbox>
+            </Border>
+        </DataTemplate>
+        
+
+    </Window.Resources>
+    <Grid DataContext="{StaticResource ThneedCollection}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- The list view. I explicitly ask to use the ThneedListItem data template -->
+        <ListView Name="_thneedListView" Grid.Row="0" ItemsSource="{Binding AllThneeds}" ItemTemplate="{StaticResource ThneedListItem}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        
+        <!-- Content presenter, displaying the current thneed. I don't tell it which template to use
+             so it uses the default template.
+        
+        
+             See 'App.xaml', that's where we wire up the default template for Thneeds
+        -->
+        <ContentPresenter Grid.Row="1">
+            <ContentPresenter.Content>
+                <Binding ElementName="_thneedListView" Path="SelectedItem" />
+            </ContentPresenter.Content>
+        </ContentPresenter>
+    </Grid>
+</Window>
